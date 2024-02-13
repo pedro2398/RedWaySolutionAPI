@@ -11,10 +11,6 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserRepository repositry;
-    public User postUser(User user) {
-        repositry.save(user);
-        return user;
-    }
 
     public List<User> getUser() {
         return repositry.findAll();
@@ -24,5 +20,10 @@ public class UserService {
         return repositry.findById(id).orElseThrow(() ->
         new RuntimeException("Unable to perform the request")
         );
+    }
+
+    public User postUser(User user) {
+        repositry.save(user);
+        return user;
     }
 }
