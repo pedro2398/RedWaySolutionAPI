@@ -1,6 +1,7 @@
 package com.RedWaySolutionAPI.service;
 
 import com.RedWaySolutionAPI.domain.User;
+import com.RedWaySolutionAPI.dto.UserDTO;
 import com.RedWaySolutionAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,21 +10,26 @@ import java.util.List;
 
 @Service
 public class UserService {
-    @Autowired
-    UserRepository repositry;
+
+    private UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public List<User> getUser() {
-        return repositry.findAll();
+        return repository.findAll();
     }
 
     public User getUserById(Long id) {
-        return repositry.findById(id).orElseThrow(() ->
-        new RuntimeException("Unable to perform the request")
+        return repository.findById(id).orElseThrow(() ->
+                new RuntimeException("Unable to perform the request")
         );
     }
 
-    public User postUser(User user) {
-        repositry.save(user);
+    public UserDTO postUser(UserDTO user) {
+        User newUser = new User(user);
+        repository.save(newUser);
         return user;
     }
 }

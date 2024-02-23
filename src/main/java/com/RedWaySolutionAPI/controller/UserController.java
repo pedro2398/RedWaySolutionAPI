@@ -1,6 +1,7 @@
 package com.RedWaySolutionAPI.controller;
 
 import com.RedWaySolutionAPI.domain.User;
+import com.RedWaySolutionAPI.dto.UserDTO;
 import com.RedWaySolutionAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class UserController {
     UserService service;
 
     @PostMapping
-    public ResponseEntity<User> postUser(@RequestBody User user) {
+    public ResponseEntity<UserDTO> postUser(@RequestBody UserDTO user) {
         System.out.println("Signing up user");
         return ResponseEntity.status(HttpStatus.CREATED).body(service.postUser(user));
     }

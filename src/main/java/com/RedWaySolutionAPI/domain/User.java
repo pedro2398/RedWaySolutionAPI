@@ -1,5 +1,6 @@
 package com.RedWaySolutionAPI.domain;
 
+import com.RedWaySolutionAPI.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +20,10 @@ public class User {
     private String lastName;
     @Column(unique = true)
     private String email;
+
+    public User(UserDTO user) {
+        this.firstName = user.firstName();
+        this.lastName = user.lastName();
+        this.email = user.email();
+    }
 }
